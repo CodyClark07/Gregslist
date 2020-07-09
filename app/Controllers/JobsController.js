@@ -40,7 +40,8 @@ export default class JobsController {
         document.getElementById("post-car").classList.add("hidden")
         document.getElementById("cars").classList.add("hidden")
         document.getElementById("post-house").classList.add("hidden")
-        document.getElementById("houses").classList.add("hidden")
+        document.getElementById("house").classList.add("hidden")
+        document.getElementById("Jobs").classList.add("hidden")
     }
     postJob() {
         document.getElementById("Jobs").classList.remove("hidden")

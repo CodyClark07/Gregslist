@@ -42,6 +42,7 @@ export default class HouseController {
         document.getElementById("cars").classList.add("hidden")
         document.getElementById("post-job").classList.add("hidden")
         document.getElementById("Jobs").classList.add("hidden")
+        document.getElementById("Houses").classList.add("hidden")
     }
 
     postHouse() {

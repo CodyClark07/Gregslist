@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Img URL</label>
-                    <input type="text" name="Img" class="form-control" placeholder="Img...">
+                    <input type="text" name="imgUrl" class="form-control" placeholder="Img...">
                 </div>
                 <div class="form-group">
                     <label for="">Description</label>
@@ -69,7 +69,7 @@
                 <button class="btn btn-primary btn-block">Submit</button class="btn">
             </form>
         </div>
-        <div id="cars" class="row hidden">
+        <div id="cars" class="row hidden justify-content-around">
 
         </div>
     </main>
@@ -81,12 +81,16 @@
             </div>
             <form onsubmit="app.housesController.addHouse(event)" class="col-8">
                 <div class="form-group">
-                    <label for="">Location</label>
-                    <input type="text" name="location" id="" class="form-control" placeholder="Enter Location...">
+                    <label for="">Levels</label>
+                    <input type="text" name="levels" id="" class="form-control" placeholder="Enter How Many Levels...">
                 </div>
                 <div class="form-group">
-                    <label for="">Address</label>
-                    <input type="text" name="address" class="form-control" placeholder="Enter Address...">
+                    <label for="">Bedroooms</label>
+                    <input type="text" name="bedrooms" class="form-control" placeholder="Enter How Many Bedrooms...">
+                </div>
+                <div class="form-group">
+                    <label for="">Bathrooms</label>
+                    <input type="text" name="bathrooms" class="form-control" placeholder="Enter How Many Bathrooms...">
                 </div>
                 <div class="form-group">
                     <label for="">Year</label>
@@ -99,7 +103,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Img URL</label>
-                    <input type="text" name="Img" class="form-control" placeholder="Img...">
+                    <input type="text" name="imgUrl" class="form-control" placeholder="Img...">
                 </div>
                 <div class="form-group">
                     <label for="">Description</label>
@@ -108,7 +112,7 @@
                 <button class="btn btn-primary btn-block">Submit</button class="btn">
             </form>
         </div>
-        <div id="house" class="row hidden">
+        <div id="houses" class="row hidden">
 
         </div>
     </section>
@@ -124,13 +128,13 @@
                     <input type="text" name="company" id="" class="form-control" placeholder="Enter Company Name...">
                 </div>
                 <div class="form-group">
-                    <label for="">Position</label>
-                    <input type="text" name="position" class="form-control" placeholder="Enter Position...">
+                    <label for="">Job Title</label>
+                    <input type="text" name="jobTitle" class="form-control" placeholder="Enter Job Title...">
                 </div>
                 <div class="form-group">
-                    <label for="">Pay</label>
-                    <input type="number" min="7.25" max="1,000,000" name="pay" class="form-control"
-                        placeholder="Enter Pay...">
+                    <label for="">Rate of Pay</label>
+                    <input type="number" min="7.25" max="1,000,000" name="rate" class="form-control"
+                        placeholder="Enter Rate of Pay...">
                 </div>
                 <div class="form-group">
                     <label for="">Hours</label>
@@ -180,6 +184,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="app/main.js" type="module"></script>
 </body>
 

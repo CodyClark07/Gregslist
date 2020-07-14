@@ -1,48 +1,56 @@
 import _housesService from "../Services/HousesService.js";
-import _store from "../store.js"
+
+import store from "../store.js";
 
 function _draw() {
     let template = ""
-    let houses = _store.State.houses
+    let houses = store.State.houses
     houses.forEach(house => template += house.Template)
-    document.getElementById("house").innerHTML = template
+    document.getElementById("houses").innerHTML = template
 }
 //Public
 export default class HouseController {
     constructor() {
         console.log("hello from house controller")
-        _draw()
+        store.subscribe("houses", _draw)
     }
     addHouse(event) {
         event.preventDefault()
         let formData = event.target
-        console.log("Add House", formData.location.value)
+
         let rawHouseData = {
-            location: formData.location.value,
-            address: formData.address.value,
+            levels: formData.levels.value,
+            bedrooms: formData.bedrooms.value,
+            bathrooms: formData.bathrooms.value,
             year: formData.year.value,
             price: formData.price.value,
-            imgUrl: formData.imgUrl,
+            imgUrl: formData.imgUrl.value,
             description: formData.description.value,
         }
         _housesService.addHouse(rawHouseData)
-        _draw()
+
         document.getElementById("Houses").classList.add("hidden")
-        document.getElementById("house").classList.add("hidden")
+        document.getElementById("houses").classList.add("hidden")
         document.getElementById("post-house").classList.add("hidden")
     }
     deleteHouse(houseId) {
         _housesService.deleteHouse(houseId)
-        _draw()
+
+    }
+    bidOnHouse(houseId) {
+        _housesService.bidOnHouse(houseId)
     }
     Houses() {
-        document.getElementById("house").classList.remove("hidden")
+        document.getElementById("houses").classList.remove("hidden")
         document.getElementById("post-house").classList.remove("hidden")
         document.getElementById("post-car").classList.add("hidden")
         document.getElementById("cars").classList.add("hidden")
         document.getElementById("post-job").classList.add("hidden")
         document.getElementById("Jobs").classList.add("hidden")
-        document.getElementById("Houses").classList.add("hidden")
+        document.getElementById("job").classList.add("hidden")
+        document.getElementById("Cars").classList.add("hidden")
+
+        _housesService.getHouses()
     }
 
     postHouse() {

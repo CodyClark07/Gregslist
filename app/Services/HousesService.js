@@ -1,17 +1,48 @@
-import _store from "../store.js";
+import store from "../store.js";
 import House from "../Models/House.js";
 
+
+const _api = axios.create({
+    baseURL: "//bcw-sandbox.herokuapp.com/api",
+    timeout: 8000
+})
 //Public
 class HousesService {
     constructor() {
         console.log("Hello from the house service")
     }
     addHouse(rawHouseData) {
-        let newHouse = new House(rawHouseData)
-        _store.addHouse(newHouse)
+        _api.post("houses", rawHouseData).then(res => {
+            console.log(res);
+            this.getHouses()
+        }).catch(err => console.error(err))
     }
     deleteHouse(houseId) {
-        _store.deleteHouse(houseId)
+        _api.delete("houses/" + houseId).then(res => {
+            this.getHouses()
+        }).catch(err => console.error(err))
+    }
+    getHouses() {
+        _api.get("houses").then(res => {
+            console.log(res);
+            let houses = res.data.data.map(rawHouseData => new House(rawHouseData))
+            store.commit("houses", houses)
+        }).catch(err => console.error(err))
+    }
+    bidOnHouse(houseId) {
+        let updatedHouse = store.State.houses.find(house => house.id == houseId)
+        updatedHouse.price += 100
+        _api.put("houses/" + houseId, updatedHouse).then(res => {
+            let houses = store.State.houses.map(c => {
+                if (c.id == houseId) {
+                    return new House(res.data)
+                }
+                else {
+                    return new House(c)
+                }
+            })
+            store.commit("houses", houses)
+        }).then(err => console.error(err))
     }
 }
 

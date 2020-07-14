@@ -1,9 +1,9 @@
 import _jobsService from "../Services/JobsService.js";
-import _store from "../store.js"
+import store from "../store.js"
 
 function _draw() {
     let template = ""
-    let jobs = _store.State.jobs
+    let jobs = store.State.jobs
     jobs.forEach(job => template += job.Template)
     document.getElementById("job").innerHTML = template
 }
@@ -11,7 +11,7 @@ function _draw() {
 export default class JobsController {
     constructor() {
         console.log("hello from job controller")
-        _draw()
+        store.subscribe("jobs", _draw)
     }
     addJob(event) {
         event.preventDefault()
@@ -19,20 +19,21 @@ export default class JobsController {
         console.log("Add Job")
         let rawJobData = {
             company: formData.company.value,
-            position: formData.position.value,
-            pay: formData.pay.value,
+            jobTitle: formData.jobTitle.value,
+            rate: formData.rate.value,
             hours: formData.hours.value,
             description: formData.description.value,
         }
         _jobsService.addJob(rawJobData)
-        _draw()
+
         document.getElementById("Jobs").classList.add("hidden")
         document.getElementById("job").classList.add("hidden")
         document.getElementById("post-job").classList.add("hidden")
     }
+
     deleteJob(jobId) {
         _jobsService.deleteJob(jobId)
-        _draw()
+
     }
     Jobs() {
         document.getElementById("post-job").classList.remove("hidden")
@@ -40,8 +41,11 @@ export default class JobsController {
         document.getElementById("post-car").classList.add("hidden")
         document.getElementById("cars").classList.add("hidden")
         document.getElementById("post-house").classList.add("hidden")
-        document.getElementById("house").classList.add("hidden")
-        document.getElementById("Jobs").classList.add("hidden")
+        document.getElementById("houses").classList.add("hidden")
+        document.getElementById("Houses").classList.add("hidden")
+        document.getElementById("Cars").classList.add("hidden")
+
+        _jobsService.getJobs()
     }
     postJob() {
         document.getElementById("Jobs").classList.remove("hidden")

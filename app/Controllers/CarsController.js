@@ -11,7 +11,7 @@ function _draw() {
 export default class CarsController {
   constructor() {
     console.log("hello from cars controller")
-    _draw()
+    _store.subscribe("cars", _draw)
   }
   addCar(event) {
     event.preventDefault()
@@ -22,18 +22,22 @@ export default class CarsController {
       model: formData.model.value,
       year: formData.year.value,
       price: formData.price.value,
-      imgUrl: formData.imgUrl,
+      imgUrl: formData.imgUrl.value,
       description: formData.description.value,
     }
     _carsService.addCar(rawCarData)
-    _draw()
+
     document.getElementById("Cars").classList.add("hidden")
     document.getElementById("post-car").classList.add("hidden")
     document.getElementById("cars").classList.add("hidden")
   }
   deleteCar(carId) {
     _carsService.deleteCar(carId)
-    _draw()
+
+  }
+
+  bidOnCar(carId) {
+    _carsService.bidOnCar(carId)
   }
   Cars() {
     document.getElementById("cars").classList.remove("hidden")
@@ -41,7 +45,12 @@ export default class CarsController {
     document.getElementById("post-job").classList.add("hidden")
     document.getElementById("job").classList.add("hidden")
     document.getElementById("post-house").classList.add("hidden")
-    document.getElementById("house").classList.add("hidden")
+    document.getElementById("houses").classList.add("hidden")
+    document.getElementById("Jobs").classList.add("hidden")
+    document.getElementById("Cars").classList.add("hidden")
+
+
+    _carsService.getCars()
   }
   postCar() {
     document.getElementById("Cars").classList.remove("hidden")

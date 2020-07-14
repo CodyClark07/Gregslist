@@ -31,7 +31,7 @@ class HousesService {
     }
     bidOnHouse(houseId) {
         let updatedHouse = store.State.houses.find(house => house.id == houseId)
-        updatedHouse.price += 100
+        updatedHouse.price += 10000
         _api.put("houses/" + houseId, updatedHouse).then(res => {
             let houses = store.State.houses.map(c => {
                 if (c.id == houseId) {

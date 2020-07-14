@@ -27,7 +27,7 @@ class CarsService {
     }
     bidOnCar(carId) {
         let updatedCar = store.State.cars.find(car => car.id == carId)
-        updatedCar.price += 100
+        updatedCar.price += 500
         _api.put("cars/" + carId, updatedCar).then(res => {
             let cars = store.State.cars.map(c => {
                 if (c.id == carId) {
